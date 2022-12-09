@@ -5,8 +5,10 @@
 # Working from Python version 3.9
 FROM python:3.9-alpine
 
+# RUN mkdir /usr/src/app/
+
 # setting the working directory inside the container to /code
-WORKDIR /code
+WORKDIR /usr/src/app/
 
 RUN apk add gcc musl-dev python3-dev libffi-dev openssl-dev
 
