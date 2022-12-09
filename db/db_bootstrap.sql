@@ -1,23 +1,44 @@
+-- This file is to bootstrap a database for the CS3200 project. 
+
+-- Create a new database.  You can change the name later.  You'll
+-- need this name in the FLASK API file(s),  the AppSmith 
+-- data source creation.
+-- create database cool_db;
+
 CREATE DATABASE curity;
-CREATE USER 'patient'@'%' IDENTIFIED BY 'patient123';
-GRANT ALTER PRIVILEGES ON curity.patient, curity.patient_disease_history TO 'patient'@'%';
-GRANT SELECT PRIVILEGES ON curity.symptoms, curity.disease TO 'patient'@'%';
-FLUSH PRIVILEGES;
 
-CREATE USER 'doctor'@'%' IDENTIFIED BY 'doctor123';
-GRANT ALL PRIVILEGES ON curity.* TO 'doctor'@'%';
-FLUSH PRIVILEGES;
+-- Via the Docker Compose file, a special user called webapp will 
+-- be created in MySQL. We are going to grant that user 
+-- all privilages to the new database we just created. 
+-- TODO: If you changed the name of the database above, you need 
+-- to change it here too.
 
-CREATE USER 'pharma_engineer'@'%' IDENTIFIED BY 'pharma_engineer123';
-GRANT ALTER PRIVILEGES ON curity.drug, curity.ingredients, curity.factory, curity.pharma_engineer, curity.pharma_sells_to_factory, curity.investor TO 'pharma_engineer'@'%';
-GRANT SELECT PRIVILEGES ON curity.orders TO 'pharma_engineer'@'%';
-FLUSH PRIVILEGES;
+grant all privileges on curity.* to 'webapp'@'%';
+flush privileges;
 
-USE curity;
+-- Move into the database we just created.
+-- TODO: If you changed the name of the database above, you need to
+-- change it here too. 
+use 'curity';
+
+-- Put your DDL 
+-- CREATE TABLE test_table (
+--   name VARCHAR(20),
+--   color VARCHAR(10)
+-- );
+
+-- Add sample data. 
+
+-- INSERT INTO test_table
+--   (name, color)
+-- VALUES
+--   ('dev', 'blue'),
+--   ('pro', 'yellow'),
+--   ('junior', 'red');
 
 CREATE TABLE 'patients' (
     'first_name' varchar(64) NOT NULL,
-    'last_name'  varchar(64) NOT NULL,
+    'last_name' varchar(64) NOT NULL,
     'patientID' int,
     'doctorID' int,
     PRIMARY KEY ('patientID'),
@@ -458,13 +479,12 @@ insert into pharma_engineer (employeeID, first_name, last_name, title, location,
 insert into pharma_engineer (employeeID, first_name, last_name, title, location, pharma_name, investorID) values (32, 'Ezequiel', 'Willimott', null, '61 Jana Plaza', 'ELYMUS REPENS POLLEN', 23);
 insert into pharma_engineer (employeeID, first_name, last_name, title, location, pharma_name, investorID) values (57, 'Skylar', 'Mangenot', null, '795 Muir Crossing', 'Ketoconazole', 24);
 
--- Via the Docker Compose file, a special user called webapp will 
--- be created in MySQL. We are going to grant that user 
--- all privilages to the new database we just created. 
--- TODO: If you changed the name of the database above, you need 
--- to change it here too.
-grant all privileges on cool_db.* to 'webapp'@'%'; -- IDENTIFIED BY 'abc123';
-flush privileges;
+CREATE TABLE 'pharma_field' (
+    'name' varchar(64),
+    'description' varchar(64),
+    'medicine_type' varchar(64),
+    PRIMARY KEY ('name')
+);
 
 insert into pharma_field (name, description, medicine_type) values ('SOLU-MEDROL', 'Drainage of Left Pleural Cavity, Percutaneous Approach', 'Liquid');
 insert into pharma_field (name, description, medicine_type) values ('Relpax', 'Articulation/Phonology Treatment using Computer', 'Tablet');
