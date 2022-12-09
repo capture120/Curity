@@ -16,9 +16,8 @@ def create_app():
 
     # these are for the DB object to be able to connect to MySQL. 
     app.config['MYSQL_DATABASE_USER'] = 'webapp'
-    # app.config['MYSQL_DATABASE_PASSWORD'] = open('/secrets/db_password.txt').readline()
-    app.config['MYSQL_DATABASE_PASSWORD'] = open('test_pwd.txt').readline()
-    # app.config['MYSQL_DATABASE_PASSWORD'] = open('C:/Users/natha/OneDrive/Desktop/3200\ Final\ Project/Curity/secrets').readline()
+    app.config['MYSQL_DATABASE_PASSWORD'] = open('/secrets/db_password.txt').readline()
+    # app.config['MYSQL_DATABASE_PASSWORD'] = open('test_pwd.txt').readline()
     app.config['MYSQL_DATABASE_HOST'] = 'db'
     app.config['MYSQL_DATABASE_PORT'] = 3306
     app.config['MYSQL_DATABASE_DB'] = 'classicmodels'  # Change this to your DB name

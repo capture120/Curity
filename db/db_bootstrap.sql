@@ -458,12 +458,13 @@ insert into pharma_engineer (employeeID, first_name, last_name, title, location,
 insert into pharma_engineer (employeeID, first_name, last_name, title, location, pharma_name, investorID) values (32, 'Ezequiel', 'Willimott', null, '61 Jana Plaza', 'ELYMUS REPENS POLLEN', 23);
 insert into pharma_engineer (employeeID, first_name, last_name, title, location, pharma_name, investorID) values (57, 'Skylar', 'Mangenot', null, '795 Muir Crossing', 'Ketoconazole', 24);
 
-CREATE TABLE 'pharma_field' (
-    'name' varchar(64),
-    'description' varchar(64),
-    'medicine_type' varchar(64),
-    PRIMARY KEY ('name')
-);
+-- Via the Docker Compose file, a special user called webapp will 
+-- be created in MySQL. We are going to grant that user 
+-- all privilages to the new database we just created. 
+-- TODO: If you changed the name of the database above, you need 
+-- to change it here too.
+grant all privileges on cool_db.* to 'webapp'@'%'; -- IDENTIFIED BY 'abc123';
+flush privileges;
 
 insert into pharma_field (name, description, medicine_type) values ('SOLU-MEDROL', 'Drainage of Left Pleural Cavity, Percutaneous Approach', 'Liquid');
 insert into pharma_field (name, description, medicine_type) values ('Relpax', 'Articulation/Phonology Treatment using Computer', 'Tablet');
