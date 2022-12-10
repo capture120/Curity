@@ -229,6 +229,9 @@ CREATE TABLE `disease_symptoms` (
 );
 
 insert into disease_symptoms (diseaseID, symptomID) values (1, 1);
+insert into disease_symptoms (diseaseID, symptomID) values (1, 2);
+insert into disease_symptoms (diseaseID, symptomID) values (1, 3);
+insert into disease_symptoms (diseaseID, symptomID) values (1, 4);
 insert into disease_symptoms (diseaseID, symptomID) values (2, 2);
 insert into disease_symptoms (diseaseID, symptomID) values (3, 3);
 insert into disease_symptoms (diseaseID, symptomID) values (4, 4);
@@ -257,6 +260,7 @@ insert into drug (drugID, name, quantity, price) values (7, 'Phentermine Hydroch
 insert into drug (drugID, name, quantity, price) values (8, 'MENTHOL, CAMPHOR, AND METHYLSALICYLATE', 158, 15.16);
 insert into drug (drugID, name, quantity, price) values (9, 'ACETAMINOPHEN, CAFFEINE, and PYRILAMINE MALEATE', 841, 4.45);
 insert into drug (drugID, name, quantity, price) values (10, 'pioglitazone', 123, 6.03);
+insert into drug (drugID, name, quantity, price) values (11, 'clotrimazole ', 43, 6.99);
 
 CREATE TABLE `disease_drugs` (
     `drugID` int(64),
@@ -266,6 +270,7 @@ CREATE TABLE `disease_drugs` (
 );
 
 insert into disease_drugs (diseaseID, drugID) values (1, 1);
+insert into disease_drugs (diseaseID, drugID) values (1, 11);
 insert into disease_drugs (diseaseID, drugID) values (2, 2);
 insert into disease_drugs (diseaseID, drugID) values (3, 3);
 insert into disease_drugs (diseaseID, drugID) values (4, 4);
@@ -311,6 +316,7 @@ insert into drug_side_effects (drugID, effectsID) values (7, 7);
 insert into drug_side_effects (drugID, effectsID) values (8, 8);
 insert into drug_side_effects (drugID, effectsID) values (9, 9);
 insert into drug_side_effects (drugID, effectsID) values (10, 10);
+insert into drug_side_effects (drugID, effectsID) values (11, 10);
 
 CREATE TABLE `orders` (
     `orderID` int(64),
