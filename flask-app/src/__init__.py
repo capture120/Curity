@@ -30,12 +30,17 @@ def create_app():
     from src.customers.customers import customers
     from src.products.products  import products
     from src.doctors.doctors import doctors
+    from src.pharm.pharm import pharm
+    from src.patients.patients import patients
 
     # Register the routes that we just imported so they can be properly handled
     app.register_blueprint(views,       url_prefix='/classic')
     app.register_blueprint(customers,   url_prefix='/classic')
     app.register_blueprint(products,    url_prefix='/classic')
     app.register_blueprint(doctors,    url_prefix='/doctors')
+    app.register_blueprint(pharm,    url_prefix='/pharma_eng')
+    app.register_blueprint(patients,    url_prefix='/patients')
+
 
 
     return app

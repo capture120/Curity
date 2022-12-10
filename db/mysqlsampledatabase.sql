@@ -126,6 +126,10 @@ insert into patients (firstName, lastName, patientID, doctorID) values ('Rogerio
 insert into patients (firstName, lastName, patientID, doctorID) values ('Rosie', 'Hollow', 8, 8);
 insert into patients (firstName, lastName, patientID, doctorID) values ('Annemarie', 'Brunicke', 9, 9);
 insert into patients (firstName, lastName, patientID, doctorID) values ('Alon', 'Yvon', 10, 10);
+insert into patients (firstName, lastName, patientID, doctorID) values ('Matt', 'Williams', 11, 1);
+insert into patients (firstName, lastName, patientID, doctorID) values ('Tony', 'Simmons', 12, 1);
+insert into patients (firstName, lastName, patientID, doctorID) values ('Taylor', 'Sockford', 13, 1);
+insert into patients (firstName, lastName, patientID, doctorID) values ('Bobby', 'Christopher', 14, 1);
 
 CREATE TABLE `field` (
     `fieldID` int(64),
@@ -203,7 +207,7 @@ insert into patient_disease_history (patientID, diseaseID, is_still_afflicted) v
 insert into patient_disease_history (patientID, diseaseID, is_still_afflicted) values (10, 10, true);
 
 CREATE TABLE `symptoms` (
-    `symptomID` int(64),
+    `symptomID` int(64) AUTO_INCREMENT,
     `name` varchar(64) NOT NULL,
     `description` varchar(64) DEFAULT 'more research required',
     `severity` int(10),
@@ -243,7 +247,7 @@ insert into disease_symptoms (diseaseID, symptomID) values (9, 9);
 insert into disease_symptoms (diseaseID, symptomID) values (10, 10);
 
 CREATE TABLE `drug` (
-    `drugID` int(64),
+    `drugID` int(64) AUTO_INCREMENT,
     `name` varchar(64) NOT NULL,
     `quantity` int(10) NOT NULL,
     `price` float,
