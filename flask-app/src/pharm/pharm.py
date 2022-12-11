@@ -93,7 +93,7 @@ def pharma_name(pharmaid):
     # putting column headers together with data
     json_data = []
 
-    # get a cursor object from the database
+    # get a cursor object from the database. 
     cursor = db.get_db().cursor()
 
     sql_command_get_engineer = f'SELECT pharma_engineer.first_name, pharma_engineer.last_name FROM pharma_engineer WHERE investorID=\"{pharmaid}\"'
