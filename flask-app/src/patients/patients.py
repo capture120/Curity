@@ -15,13 +15,14 @@ def get_symptoms(disease_name):
 
     cursor = db.get_db().cursor()
 
-    get_symptoms_sql = f'SELECT symptoms.name, symptoms.severity FROM (SELECT symptomID FROM disease_symptoms WHERE name = {disease_name}) \
-    as symp JOIN symptoms on symptoms.symptomID = symp.symptomID'
+    get_symptoms_sql = f'SELECT symptoms.name, symptoms.severity FROM symptoms JOIN disease_symptoms on \
+    symptoms.symptomID = disease_symptoms.symptomID JOIN disease on \
+    disease_symptoms.diseaseID = disease.diseaseID WHERE disease.name = \"{disease_name}\"'
 
     # get_severity_sql = ('SELECT symptoms.severity FROM (SELECT symptomID FROM disease_symptoms WHERE diseaseID=1) \
     # as symp JOIN symptoms on symptoms.symptomID = symp.symptomID')
 
-    # column_headers = [x[0] for x in cursor.description]
+    # column_headers = [x[0] for x in cursor.description
 
     execute_sql(cursor, json_data, get_symptoms_sql)
     # execute_sql(cursor, json_data, get_severity_sql)
@@ -37,7 +38,7 @@ def get_medicines(disease_name):
     json_data = []
     cursor = db.get_db().cursor()
 
-    get_medicine_sql = f'SELECT dr.name, dr.price, dr.quantity FROM (SELECT diseaseID FROM disease WHERE name = {disease_name}) \
+    get_medicine_sql = f'SELECT dr.name, dr.price, dr.quantity FROM (SELECT diseaseID FROM disease WHERE name = \"{disease_name}\") \
     as d JOIN disease_drugs as dd on dd.diseaseID = d.diseaseID JOIN drug as dr on\
     dr.drugID = dd.drugID'
 
@@ -56,7 +57,7 @@ def get_doctors(disease_name):
     get_doctor_sql = f'SELECT doctor.first_name, doctor.last_name, doctor.email FROM doctor \
     JOIN patients on doctor.doctorID = patients.doctorID JOIN patient_disease_history on\
     patients.patientID = patient_disease_history.patientID JOIN disease on patient_disease_history.diseaseID \
-    = disease.diseaseID WHERE disease.name = {disease_name}'
+    = disease.diseaseID WHERE disease.name = \"{disease_name}\"'
     
     
     # (SELECT diseaseID FROM disease WHERE name = {disease_name}) \
@@ -70,17 +71,15 @@ def get_doctors(disease_name):
     return jsonified_data
 
 
-@patients.route('/symptoms', methods=['POST'])
-def post_symptoms():
-    current_app.logger.info(request.form)
-    symptom_name = request.form('symptom_name')
+# @patients.route('/symptoms', methods=['POST'])
+# def post_symptoms():
+#     current_app.logger.info(request.form)
+#     symptom_name = request.form('symptom_name')
 
 @patients.route('/<symptom_name>')
 def disease_list(symptom_name):
     json_data = []
     cursor = db.get_db().cursor()
-
-    sys.stderr.write(symptom_name + "\n")
 
     get_disease_sql = f'SELECT disease.name FROM disease JOIN disease_symptoms on disease.diseaseID = disease_symptoms.diseaseID JOIN symptoms on symptoms.symptomID = disease_symptoms.symptomID WHERE symptoms.name = \"{symptom_name}\"'
     execute_sql(cursor, json_data, get_disease_sql)
